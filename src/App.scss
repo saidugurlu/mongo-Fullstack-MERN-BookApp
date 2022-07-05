@@ -23,8 +23,33 @@ body {
 					color: rgb(212, 212, 138);
 					font-size: 1.5rem;
 				}
+
 				div.buttons {
 					margin-top: 10px;
+
+					button {
+						margin-left: 5px;
+					}
+				}
+
+				div.editPanel {
+					background-color: #555;
+					border: 1px solid #888;
+					padding: 10px;
+					border-radius: 5px;
+					margin-top: 10px;
+
+					input {
+						width: 80%;
+					}
+
+					.innerButtons {
+						margin-top: 5px;
+
+						button {
+							margin-left: 5px;
+						}
+					}
 				}
 			}
 		}
