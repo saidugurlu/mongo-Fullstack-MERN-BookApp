@@ -2,11 +2,15 @@
   "name": "mongo-fullstack-mern-app",
   "version": "1.0.0",
   "description": "",
-  "type":"module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js" },
+    "dev": "nodemon server.js"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
 }
