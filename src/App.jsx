@@ -13,7 +13,7 @@ function App() {
 	const [fieldLanguage, setFieldLanguage] = useState('');
 	const [fieldImageUrl, setFieldImageUrl] = useState('');
 	const [fieldBuyUrl, setFieldBuyUrl] = useState('');
-
+  const [addPanelShowing, setAddPanelShowing] = useState(false);
 	useEffect(() => {
 		(async () => {
 			const _books = (await axios.get(`${url}/book`)).data.books;
@@ -78,11 +78,25 @@ function App() {
 		setBooks([...books]);
 	};
 
+
+  const handleAddBook = async (e, book) => {
+    setAddPanelShowing(!addPanelShowing);
+  };
+
 	return (
 		<div className="App">
 			<h1>Book Site</h1>
 
 			<p>There are {books.length} books.</p>
+
+			<div className="addArea">
+				<button className="addBook" onClick={(e) => handleAddBook(e)}>
+					Add Book
+				</button>
+        {addPanelShowing && (
+				<div className="addFormPanel">...add form...</div>
+        )}
+			</div>
 
 			<div className="books">
 				{books.map((book, i) => {
