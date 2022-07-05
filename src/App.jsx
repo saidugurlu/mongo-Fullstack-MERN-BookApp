@@ -8,6 +8,10 @@ function App() {
 	const [books, setBooks] = useState([]);
 	const [fieldTitle, setFieldTitle] = useState('');
 	const [fieldDescription, setFieldDescription] = useState('');
+	const [fieldNumberOfPages, setFieldNumberOfPages] = useState('');
+	const [fieldLanguage, setFieldLanguage] = useState('');
+	const [fieldImageUrl, setFieldImageUrl] = useState('');
+	const [fieldBuyUrl, setFieldBuyUrl] = useState('');
 
 	useEffect(() => {
 		(async () => {
@@ -30,12 +34,21 @@ function App() {
 		book.editPanelShowing = true;
 		setFieldTitle(book.title);
 		setFieldDescription(book.description);
+		setFieldNumberOfPages(book.numberOfPages);
+    setFieldLanguage(book.language);
+    setFieldImageUrl(book.imageUrl);
+    setFieldBuyUrl(book.buyUrl);
 		setBooks([...books]);
 	};
 
 	const handleButtonClear = async (e, book) => {
 		book.editPanelShowing = false;
 		setFieldTitle('');
+		setFieldDescription('');
+		setFieldNumberOfPages('');
+		setFieldLanguage('');
+		setFieldImageUrl('');
+		setFieldBuyUrl('');
 		setBooks([...books]);
 	};
 
@@ -44,11 +57,19 @@ function App() {
 
 		book.title = fieldTitle;
 		book.description = fieldDescription;
+		book.numberOfPages = fieldNumberOfPages;
+		book.language = fieldLanguage;
+		book.imageUrl = fieldImageUrl;
+		book.buyUrl = fieldBuyUrl;
 
 		const putUrl = `${url}/book/${book._id}`;
     await axios.put(putUrl, { 
       title: book.title,
-      description: book.description
+      description: book.description,
+      numberOfPages: book.numberOfPages,
+      language: book.language,
+      imageUrl: book.imageUrl,
+      buyUrl: book.buyUrl
     });
 
 		setBooks([...books]);
@@ -90,6 +111,7 @@ function App() {
 								{book.editPanelShowing && (
 									<>
 										<div className="editPanel">
+
 											<div className="row">
                         <div className="label">Title:</div>
 												<input
@@ -101,6 +123,7 @@ function App() {
 													}
 												/>
 											</div>
+
 											<div className="row">
                         <div className="label">Description:</div>
                         <textarea
@@ -113,6 +136,55 @@ function App() {
 													}>
                         </textarea>
 											</div>
+
+											<div className="row">
+                        <div className="label">Number of Pages:</div>
+												<input
+													value={fieldNumberOfPages}
+													onChange={(e) =>
+														setFieldNumberOfPages(
+															e.target.value
+														)
+													}
+												/>
+											</div>
+
+											<div className="row">
+                        <div className="label">Language</div>
+												<input
+													value={fieldLanguage}
+													onChange={(e) =>
+														setFieldLanguage(
+															e.target.value
+														)
+													}
+												/>
+											</div>
+
+											<div className="row">
+                        <div className="label">Image URL</div>
+												<input
+													value={fieldImageUrl}
+													onChange={(e) =>
+														setFieldImageUrl(
+															e.target.value
+														)
+													}
+												/>
+											</div>
+
+											<div className="row">
+                        <div className="label">Buy URL</div>
+												<input
+													value={fieldBuyUrl}
+													onChange={(e) =>
+														setFieldBuyUrl(
+															e.target.value
+														)
+													}
+												/>
+											</div>
+
 											<div className="innerButtons">
 												<button
 													onClick={(e) =>
