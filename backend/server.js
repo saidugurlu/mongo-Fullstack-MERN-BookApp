@@ -1,11 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import { Book } from "./models/Book.js";
+import cors from 'cors';
 
 mongoose.connect("mongodb://localhost/mongo-Fullstack-MERN-BookApp");
 
 const app = express();
 const port = 3022;
+app.use(cors());
 
 app.use(express.json());
 
