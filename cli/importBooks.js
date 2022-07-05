@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { Book } from '../models/Book.js';
  
-mongoose.connect('mongodb://localhost/bookapi');
+mongoose.connect('mongodb://localhost/mongo-Fullstack-MERN-App-001');
  
 console.log('connected to mongoose')
  
