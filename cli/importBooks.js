@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Book } from "../models/Book.js";
 import axios from "axios";
 
-mongoose.connect("mongodb://localhost/mongo-Fullstack-MERN-App-001");
+mongoose.connect("mongodb://localhost/mongo-Fullstack-MERN-BookApp");
 
 const url = "https://edwardtanguay.netlify.app/share/books.json";
 

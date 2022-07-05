@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { Book } from "./models/Book.js";
 
-mongoose.connect("mongodb://localhost/mongo-Fullstack-MERN-App-001");
+mongoose.connect("mongodb://localhost/mongo-Fullstack-MERN-BookApp");
 
 const app = express();
 const port = 3022;
