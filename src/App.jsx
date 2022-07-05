@@ -16,7 +16,9 @@ function App() {
 
   const handleButtonDelete = async (e, book) => {
     const deleteUrl = `${url}/book/${book._id}`;
-    const res = await axios.delete(deleteUrl);
+    await axios.delete(deleteUrl);
+    const _books = books.filter(m => m._id !== book._id);
+    setBooks(_books);
   }
 
 	return (
