@@ -1,27 +1,32 @@
 body {
-  background-color: #333;
-  color: #ccc;
-  padding: 0 20px;
-  div.books {
+	background-color: #333;
+	color: #ccc;
+	padding: 0 20px;
+
+	div.books {
 
 
-    div.book {
-      background-color: #222;
-      margin-bottom: 10px;
-      padding: 20px;
-      display: flex;
+		div.book {
+			background-color: #222;
+			margin-bottom: 10px;
+			padding: 20px;
+			display: flex;
 
-      img {
-        height: 150px;
-      }
+			img {
+				height: 150px;
+			}
 
-      div.info {
-        margin-left: 20px;
-        div.title {
-          color: rgb(212, 212, 138);
-          font-size: 1.5rem;
-        }
-      }
-    }
-  }
+			div.info {
+				margin-left: 20px;
+
+				div.title {
+					color: rgb(212, 212, 138);
+					font-size: 1.5rem;
+				}
+				div.buttons {
+					margin-top: 10px;
+				}
+			}
+		}
+	}
 }

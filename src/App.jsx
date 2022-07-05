@@ -14,6 +14,11 @@ function App() {
 		})();
 	}, []);
 
+  const handleButtonDelete = async (e, book) => {
+    const deleteUrl = `${url}/book/${book._id}`;
+    const res = await axios.delete(deleteUrl);
+  }
+
 	return (
 		<div className="App">
 			<h1>Book Site</h1>
@@ -23,12 +28,23 @@ function App() {
 			<div className="books">
 				{books.map((book, i) => {
 					return (
-						<div className="book">
-              <img src={book.imageUrl}/>
-              <div className="info">
-							<div className="title">{book.title}</div>
-              <div className="description">{book.description}</div>
-              </div>
+						<div key={i} className="book">
+							<img src={book.imageUrl} />
+							<div className="info">
+								<div className="title">{book.title}</div>
+								<div className="description">
+									{book.description}
+								</div>
+								<div className="buttons">
+									<button
+										onClick={(e) =>
+											handleButtonDelete(e, book)
+										}
+									>
+										Delete
+									</button>
+								</div>
+							</div>
 						</div>
 					);
 				})}
