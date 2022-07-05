@@ -13,3 +13,5 @@ const book = new Book({
 await book.save();
 console.log('imported completed');
 process.exit(1);
+
+// Bu file/cli ile baska bir API den veri cekip kendi uygulamamiza yüklüyoruz.
