@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
 import axios from 'axios';
+import { EditBookForm } from './components/EditBookForm';
 
 const url = 'http://localhost:3022';
 
@@ -35,13 +36,14 @@ function App() {
 		setFieldTitle(book.title);
 		setFieldDescription(book.description);
 		setFieldNumberOfPages(book.numberOfPages);
-    setFieldLanguage(book.language);
-    setFieldImageUrl(book.imageUrl);
-    setFieldBuyUrl(book.buyUrl);
+		setFieldLanguage(book.language);
+		setFieldImageUrl(book.imageUrl);
+		setFieldBuyUrl(book.buyUrl);
 		setBooks([...books]);
 	};
 
 	const handleButtonClear = async (e, book) => {
+    e.preventDefault();
 		book.editPanelShowing = false;
 		setFieldTitle('');
 		setFieldDescription('');
@@ -53,6 +55,7 @@ function App() {
 	};
 
 	const handleButtonSave = async (e, book) => {
+    e.preventDefault();
 		book.editPanelShowing = false;
 
 		book.title = fieldTitle;
@@ -63,14 +66,14 @@ function App() {
 		book.buyUrl = fieldBuyUrl;
 
 		const putUrl = `${url}/book/${book._id}`;
-    await axios.put(putUrl, { 
-      title: book.title,
-      description: book.description,
-      numberOfPages: book.numberOfPages,
-      language: book.language,
-      imageUrl: book.imageUrl,
-      buyUrl: book.buyUrl
-    });
+		await axios.put(putUrl, {
+			title: book.title,
+			description: book.description,
+			numberOfPages: book.numberOfPages,
+			language: book.language,
+			imageUrl: book.imageUrl,
+			buyUrl: book.buyUrl,
+		});
 
 		setBooks([...books]);
 	};
@@ -108,108 +111,26 @@ function App() {
 										Edit
 									</button>
 								</div>
-								{book.editPanelShowing && (
-									<>
-										<div className="editPanel">
-
-											<div className="row">
-                        <div className="label">Title:</div>
-												<input
-													value={fieldTitle}
-													onChange={(e) =>
-														setFieldTitle(
-															e.target.value
-														)
-													}
-												/>
-											</div>
-
-											<div className="row">
-                        <div className="label">Description:</div>
-                        <textarea
-
-													value={fieldDescription}
-													onChange={(e) =>
-														setFieldDescription(
-															e.target.value
-														)
-													}>
-                        </textarea>
-											</div>
-
-											<div className="row">
-                        <div className="label">Number of Pages:</div>
-												<input
-													value={fieldNumberOfPages}
-													onChange={(e) =>
-														setFieldNumberOfPages(
-															e.target.value
-														)
-													}
-												/>
-											</div>
-
-											<div className="row">
-                        <div className="label">Language</div>
-												<input
-													value={fieldLanguage}
-													onChange={(e) =>
-														setFieldLanguage(
-															e.target.value
-														)
-													}
-												/>
-											</div>
-
-											<div className="row">
-                        <div className="label">Image URL</div>
-												<input
-													value={fieldImageUrl}
-													onChange={(e) =>
-														setFieldImageUrl(
-															e.target.value
-														)
-													}
-												/>
-											</div>
-
-											<div className="row">
-                        <div className="label">Buy URL</div>
-												<input
-													value={fieldBuyUrl}
-													onChange={(e) =>
-														setFieldBuyUrl(
-															e.target.value
-														)
-													}
-												/>
-											</div>
-
-											<div className="innerButtons">
-												<button
-													onClick={(e) =>
-														handleButtonClear(
-															e,
-															book
-														)
-													}
-												>
-													Clear
-												</button>
-												<button
-													onClick={(e) =>
-														handleButtonSave(
-															e,
-															book
-														)
-													}
-												>
-													Save
-												</button>
-											</div>
-										</div>
-									</>
-								)}
+								<EditBookForm
+									formIsShowing={book.editPanelShowing}
+									fieldTitle={fieldTitle}
+									setFieldTitle={setFieldTitle}
+									fieldDescription={fieldDescription}
+									setFieldDescription={setFieldDescription}
+									fieldNumberOfPages={fieldNumberOfPages}
+									setFieldNumberOfPages={
+										setFieldNumberOfPages
+									}
+									fieldLanguage={fieldLanguage}
+									setFieldLanguage={setFieldLanguage}
+                  fieldImageUrl={fieldImageUrl}
+                  setFieldImageUrl={setFieldImageUrl}
+                  fieldBuyUrl={fieldBuyUrl}
+                  setFieldBuyUrl={setFieldBuyUrl}
+                  handleButtonClear={handleButtonClear}
+                  handleButtonSave={handleButtonSave}
+                  book={book}
+								/>
 							</div>
 						</div>
 					);
