@@ -1,4 +1,7 @@
 import express from 'express';
+import mongoose from 'mongoose';
+ 
+mongoose.connect('mongodb://localhost/mongo-Fullstack-MERN-App-001');
  
 const app = express();
 const port = 3022;
