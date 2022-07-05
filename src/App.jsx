@@ -6,7 +6,8 @@ const url = 'http://localhost:3022';
 
 function App() {
 	const [books, setBooks] = useState([]);
-  const [fieldTitle, setFieldTitle] = useState('');
+	const [fieldTitle, setFieldTitle] = useState('');
+	const [fieldDescription, setFieldDescription] = useState('');
 
 	useEffect(() => {
 		(async () => {
@@ -27,26 +28,29 @@ function App() {
 
 	const handleButtonEdit = async (e, book) => {
 		book.editPanelShowing = true;
-    setFieldTitle(book.title);
+		setFieldTitle(book.title);
+		setFieldDescription(book.description);
 		setBooks([...books]);
 	};
 
 	const handleButtonClear = async (e, book) => {
 		book.editPanelShowing = false;
-    setFieldTitle('');
+		setFieldTitle('');
 		setBooks([...books]);
 	};
 
 	const handleButtonSave = async (e, book) => {
 		book.editPanelShowing = false;
-    book.title = fieldTitle;
-  
+
+		book.title = fieldTitle;
+		book.description = fieldDescription;
+
 		const putUrl = `${url}/book/${book._id}`;
-    await axios.put(putUrl, {
-      title: book.title
+    await axios.put(putUrl, { 
+      title: book.title,
+      description: book.description
     });
 
-    setFieldTitle('');
 		setBooks([...books]);
 	};
 
@@ -75,7 +79,7 @@ function App() {
 										Delete
 									</button>
 									<button
-                  disabled={book.editPanelShowing}
+										disabled={book.editPanelShowing}
 										onClick={(e) =>
 											handleButtonEdit(e, book)
 										}
@@ -86,25 +90,51 @@ function App() {
 								{book.editPanelShowing && (
 									<>
 										<div className="editPanel">
-                      <div className="row">
-                        Title: <input value={fieldTitle} onChange={(e) => setFieldTitle(e.target.value)} />
-                      </div>
-                      <div className="innerButtons">
-											<button
-												onClick={(e) =>
-													handleButtonClear(e, book)
-												}
-											>
-												Clear
-											</button>
-											<button
-												onClick={(e) =>
-													handleButtonSave(e, book)
-												}
-											>
-												Save
-											</button>
-                      </div>
+											<div className="row">
+                        <div className="label">Title:</div>
+												<input
+													value={fieldTitle}
+													onChange={(e) =>
+														setFieldTitle(
+															e.target.value
+														)
+													}
+												/>
+											</div>
+											<div className="row">
+                        <div className="label">Description:</div>
+                        <textarea
+
+													value={fieldDescription}
+													onChange={(e) =>
+														setFieldDescription(
+															e.target.value
+														)
+													}>
+                        </textarea>
+											</div>
+											<div className="innerButtons">
+												<button
+													onClick={(e) =>
+														handleButtonClear(
+															e,
+															book
+														)
+													}
+												>
+													Clear
+												</button>
+												<button
+													onClick={(e) =>
+														handleButtonSave(
+															e,
+															book
+														)
+													}
+												>
+													Save
+												</button>
+											</div>
 										</div>
 									</>
 								)}
